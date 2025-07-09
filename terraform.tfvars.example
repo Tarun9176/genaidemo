@@ -1,0 +1,55 @@
+# Terraform Variables Example File
+# Copy this file to terraform.tfvars and customize the values for your environment
+# This file demonstrates how to provide values for the required variables
+
+# Environment Configuration
+# Specify the target environment (must be: dev, staging, or prod)
+environment = "dev"
+
+# AWS Region Configuration
+# AWS region where resources will be deployed
+aws_region = "us-west-2"
+
+# ECS Cluster Configuration
+# Name for your ECS cluster (will be used as prefix for related resources)
+cluster_name = "my-web-app"
+
+# Network Configuration
+# IMPORTANT: Replace these with your actual VPC and subnet IDs
+# VPC ID where ECS resources will be created
+vpc_id = "vpc-12345678"
+
+# List of subnet IDs across multiple AZs for high availability
+# Recommend using private subnets with NAT gateway for production
+subnet_ids = [
+  "subnet-12345678",  # AZ 1
+  "subnet-87654321"   # AZ 2
+]
+
+# Container Configuration
+# Docker image to deploy (can be from ECR, Docker Hub, etc.)
+container_image = "nginx:latest"
+
+# Port that your application listens on inside the container
+container_port = 80
+
+# Resource Allocation
+# CPU and memory allocation for ECS tasks
+# Valid CPU/Memory combinations for Fargate:
+# CPU: 256, Memory: 512, 1024, 2048
+# CPU: 512, Memory: 1024-4096 (in 1GB increments)
+# CPU: 1024, Memory: 2048-8192 (in 1GB increments)
+task_cpu    = 256   # 0.25 vCPU
+task_memory = 512   # 512 MB
+
+# Scaling Configuration
+# Number of task instances to run simultaneously
+desired_count = 2   # Minimum 2 for high availability
+
+# Sensitive Data (store in separate .tfvars file or use environment variables)
+# Database credentials
+db_username = "admin"
+db_password = "<your-secure-password>"
+
+# API credentials
+api_key = "<your-api-key>"
